@@ -148,7 +148,8 @@ def extract_article_info(driver, url):
         CATEGORY_MAP = {
             "dom": "国内",
             "wor": "国際",
-            "eco": "経済",
+            "bus": "経済",
+            "eco": "経済", 
             "ent": "エンタメ",
             "spo": "スポーツ",
             "it": "IT",
