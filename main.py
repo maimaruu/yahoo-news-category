@@ -243,8 +243,12 @@ def extract_article_info(driver, url):
                             sub_genre_jp = SUBCATEGORY_MAP[sub_category_short]
                             genre = f"{main_genre_jp}/{sub_genre_jp}"
                         else:
-                            # サブカテゴリが見つからない場合やマッピングにない場合は、主要カテゴリの「総合」
-                            genre = f"{main_genre_jp}総合" if main_genre_jp != "主要" else "その他"
+                         # サブカテゴリが見つからない場合やマッピングにない場合は、「大カテゴリ/大カテゴリ総合」とする
+                         if main_genre_jp != "主要":
+                             genre = f"{main_genre_jp}/{main_genre_jp}総合"
+                         else:
+                             # 主要カテゴリは「主要総合」とはせず、「主要」のままにする
+                             genre = "主要"
                     else:
                         cat_path = state_data.get('pageData', {}).get('pageParam', {}).get('cat_path')
                         if cat_path:
@@ -312,7 +316,7 @@ def extract_article_info(driver, url):
                         if short_name == "it": genre = "IT"
                         elif short_name == "sci": genre = "科学"
                         elif short_name == "main": genre = "主要"
-                        else: genre = f"{jp_name}総合"
+                        else: genre = f"{jp_name}/{jp_name}総合"
                         print(f"[DEBUG] Inferred genre from URL (main category fallback): {genre}")
                         found_by_url = True
                         break
@@ -421,6 +425,7 @@ if __name__ == "__main__":
 
             "経済": 1,
             "経済総合": 1,
+            "経済/経済総合": 1,
             "経済/市況": 1,
             "経済/株式": 1,
             "経済/産業": 1,
