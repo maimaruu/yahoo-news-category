@@ -14,7 +14,7 @@ import gspread
 
 # --- Google Sheets設定 ---
 SERVICE_ACCOUNT_FILE = "credentials.json"
-SHEET_NAME = "yahoo-news-scraper" # スプレッドシート名を変更
+SHEET_NAME = "yahoo-news-scraper2" # スプレッドシート名を変更
 # シート名はデフォルトで最初のシート（sheet1）が使用されます。
 
 # --- Selenium設定 ---
